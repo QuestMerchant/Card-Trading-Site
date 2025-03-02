@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    {% if session %}
+        <h1>Welcome {{session.userinfo.name}}!</h1>
+        <h2>Gems: {{session.user_info.gems}}</h2>
+        <div class="container">
+            <h2 class="mt-5">Reveal a new card for 10 Gems</h2>
+            <form action="/reveal_card" method="post">
+                <button type="submit" style="border: none; background: none;">
+                    <img src="static/Backing.png" alt="random-card">
+                </button>
+            </form>
+            <h6>Percentage chances: Card Value, Chance of getting in %</h6>
+            <br>10, 60%</br>
+            <br>20, 26%</br>
+            <br>40, 12%</br>
+            <br>80, 2%</br>
+        </div>
+ <!--   {% if random_card %}
+        <div class="container">
+            <img src="{{ random_card.image_path }}" alt="{{ random_card.name }}">
+        </div>
+        {% endif %} -->
+        <p><a href="/logout">Logout</a></p>
+    {% else %}
+        <h1>Welcome Guest</h1>
+        <p><a href="/login">Login</a></p>
+    {% endif %}
+{% endblock %}

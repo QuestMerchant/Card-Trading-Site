@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    {% if session %}
+    <h1>Select Cards to Buy</h1>
+    <div class="text-end">
+        <h3>Gems: {{ gems }}</h3>
+    </div>
+    <form action="/buy" method="post" id="buy-form">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Card</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Value</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for card in cards_on_sale %}
+                    <tr>
+                        <td>
+                            <div class="card-container">
+                                <img class="text-sm-start image-fluid"  src="{{ card.image_path }}" alt="{{ card.name }}">
+                                <input type="checkbox" class="checkbox" data-price="{{ card.price }}" data-sale-id="{{ card.sale_id }}" value="{{ card.id }}">
+                                <input type="hidden" id="sale-id-{{ card.sale_id }}" value="{{ card.sale_id }}">
+                            </div>
+                        </td>
+                        <td>{{ card.name }}</td>
+                        <td>{{ card.cost }}</td>
+                        <td id="price{{ card.id }}">{{ card.price }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-end">
+            <div id="total-cost">Total Cost: 0 Gems</div>
+            <button type="submit" class="btn btn-primary mb-3">Buy</button>
+        </div>
+    </form>
+    <input type="hidden" id="user-gems" value="{{ gems }}">
+    {% else %}
+        <h1>Please Login</h1>
+        <p><a href="/login">Login</a></p>
+    {% endif %}
+{% endblock %}

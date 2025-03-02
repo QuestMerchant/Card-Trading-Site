@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Card Collection
+{% endblock %}
+
+{% block main %}
+    {% if session %}
+        <!-- Large view -->
+        <div class="container">
+            <img id="largeCard" src="{{ user_cards[0]['image_path'] }}" alt="{{ user_cards[0]['name'] }}" class="img-fluid">
+            <div class="text" id="largeCardDetails">
+                Name: {{ user_cards[0]['name'] }}
+                <p>Valued at: {{ user_cards[0]['cost'] }} Gems</p>
+            </div>
+        </div>
+
+
+        <!-- Small view -->
+        <div class="small-images">
+            {% for card in user_cards %}
+            <div class="card">
+                <img class="smallCard" src="{{ card['image_path'] }}" alt="{{ card.name }}" data-name="{{ card.name }}" data-cost="{{ card.cost }}">
+                {% if card.quantity > 1 %}
+                    <div class="quantity">{{ card.quantity }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <h1>Please login</h1>
+        <p><a href="/login">Login</a></p>
+    {% endif %}
+{% endblock %}

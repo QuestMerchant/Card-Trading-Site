@@ -1,0 +1,113 @@
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+
+.col-2{
+    padding-right: calc(var(--bs-gutter-x)* 0.1);
+    padding-left: calc(var(--bs-gutter-x)* 0.1);
+}
+.left-pad{
+    padding-left: calc(var(--bs-gutter-x)* 0.1);
+}
+
+.card-container{
+    position: relative;
+    display: inline-block; /* Ensures the container size matches the image */
+    height: 200px; /* Set the height you want */
+    width: auto;
+}
+.card-container img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain; /* Keeps the aspect ratio without stretching */
+}
+
+.small-images{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.card {
+    position: relative;
+}
+
+.quantity {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.checkbox {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    width: auto;  /* Increase the width */
+    height: auto; /* Increase the height */
+    transform: scale(1.2); /* Scale the checkbox */
+    transform-origin: top right; /* Keep the position consistent */
+}
+.zoom-pan {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 120%;
+    height:120%;
+    object-fit: cover;
+    animation: zoomPan 8s infinite linear;
+}
+
+@keyframes zoomPan {
+    0% { transform: scale(1.2) translateX(0);}
+    100% { transform: scale(1.2) translateX(-20%);}
+}
+
+.carousel-item img{
+    overflow: hidden;
+}
+
+.content {
+    position: relative;
+    padding: 20px;
+    padding-bottom: 100px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-background{
+    position: fixed;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    z-index: -1; /* Send to back*/
+}
+.footer {
+    position: fixed;
+    margin-bottom: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 10px 0;
+}
+#largeCard {
+    height: 100%
+}
+#largeCardDetails{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+}

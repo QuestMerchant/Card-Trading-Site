@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+    {% if session %}
+        <!-- Show any cards already on sale(for_sale) -->
+        <div class="container text-center">
+            <div class="row">
+                <div class="col"><h3><strong>Your cards on sale</strong></div></h3>
+            </div>
+            <div class="row fw-bold">
+                <div class="col">Card</div>
+                <div class="col-3">Name</div>
+                <div class="col-1">Price</div>
+                <div class="col-2"></div>
+                <div class="col-2"></div>
+            </div>
+            {% for sale in for_sale %}
+            <div class="row">
+                <div class="col">
+                    <img class="text-center image-fluid" style="height:200px" src="{{ sale['image_path'] }}" alt="{{ sale.name }}" data-name="{{ sale.name }}">
+                </div>
+                <div class="col-3">
+                    <span>{{ sale.name }}</span>
+                </div>
+                <div class="col-1">
+                    <span>{{ sale.price }}</span>
+                </div>
+                <div class="col-2">
+                    <form action="/price" method="post">
+                        <input type="text" name="price" class="form-control" placeholder="Enter new price">
+                        <input type="hidden" name="sale_id" value="{{ sale.sale_id }}">
+                        <button type="submit" class=" btn btn-primary mb-3">Update</button>
+                    </form>
+                </div>
+                <div class="col-2">
+                    <form action="/delete" method="post">
+                        <input type="hidden" name="sale_id" value="{{ sale.sale_id }}">
+                        <button type="submit" class=" btn btn-primary mb-3">Return to Collection</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <p></p>
+        <hr class="my-4">
+        <form action="/sell" method="post" id="sell-form">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col"><h3><strong>Select Cards to Sell</strong></h3></div>
+                </div>
+                <div class="row fw-bold">
+                    <div class="col-5 col-sm-6">Card</div>
+                    <div class="col-2 col-sm-1 left-pad">Select</div>
+                    <div class="col-2">Value</div>
+                    <div class="col-2">Selling Price</div>
+                    <div class="col-1">Quantity</div>
+                </div>
+                <!-- Show user cards (user_cards) -->
+                {% for card in user_cards %}
+                    <div class="row ">
+                        <div class="col">
+                            <div class="card-container">
+                                <img class="text-sm-start image-fluid" style="height:200px" src="{{ card['image_path']}}" alt="{{ card.name }}" data-name="{{ card.name }}">
+                                {% if card.quantity > 1 %}
+                                    <div class="quantity">{{ card.quantity }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- Select cards to sell -->
+                        <div class="col-1 left-pad">
+                            <input type="checkbox" id="{{ card.name }}" name="{{ card.name }}" value="{{ card.id }}">
+                        </div>
+                        <div class="col-2">
+                            <span>{{ card.cost }}</span>
+                        </div>
+                        <!-- Input price -->
+                        <div class="col-2">
+                            <input type="text" id="price{{ card.id }}" name="price-original" class="form-control" placeholder="Enter Price">
+                        </div>
+                        <div class="col-1">
+                            <input type="text" id="quantity{{ card.id }}" name="quantity" class="form-control" placeholder="{{ card.quantity }}" data-quantity="{{ card.quantity }}">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary mb-3">Submit</button>
+            </div>
+        </form>
+    {% else %}
+        <h1>Please Login</h1>
+        <p><a href="/login">Login</a></p>
+    {% endif %}
+{% endblock %}

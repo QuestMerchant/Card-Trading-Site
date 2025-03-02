@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Trade Market
+{% endblock %}
+
+{% block main %}
+    {% if session %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 d-flex justify-content-center">
+        <a href="/buy" class="btn btn-primary d-flex align-items-center justify-content-center" style="width: 100%; height: 0; padding-bottom: 100%; position: relative;">
+          <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 8vw">Buy</span>
+        </a>
+      </div>
+      <div class="col-md-6 d-flex justify-content-center">
+        <a href="/sellpage" class="btn btn-primary d-flex align-items-center justify-content-center" style="width: 100%; height: 0; padding-bottom: 100%; position: relative;">
+          <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 8vw">Sell</span>
+        </a>
+      </div>
+    </div>
+  </div>
+    {% else %}
+        <h1>Please Login</h1>
+        <p><a href="/login">Login</a></p>
+    {% endif %}
+{% endblock %}
